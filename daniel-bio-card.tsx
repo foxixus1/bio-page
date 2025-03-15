@@ -14,8 +14,9 @@ import {
   Github,
   Code,
   Database,
+  Camera
 } from "lucide-react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { CIcon } from '@coreui/icons-react'
@@ -27,11 +28,37 @@ import {
   cibReact,
   cibTelegram 
 } from '@coreui/icons'
+import html2canvas from 'html2canvas'
 
 export default function DanielBioCard() {
   const [currentTime, setCurrentTime] = useState("09:08")
   const [currentDate, setCurrentDate] = useState("Fri, September 2, 2022")
   const [showBio, setShowBio] = useState(false)
+  const cardRef = useRef<HTMLDivElement>(null)
+  const [avatarLoaded, setAvatarLoaded] = useState(false)
+
+  // Функция для создания скриншота и скачивания
+  const captureAndDownload = async () => {
+    if (cardRef.current) {
+      try {
+        const canvas = await html2canvas(cardRef.current, {
+          useCORS: true,         // Разрешает кросс-доменные изображения
+          allowTaint: true,      // Разрешает "tainted" canvas
+          backgroundColor: null, // Прозрачный фон
+          scale: 2,              // Увеличиваем качество в 2 раза
+          logging: true          // Для отладки
+        });
+        
+        // Создаем ссылку на изображение
+        const link = document.createElement('a')
+        link.download = 'bio-card.png'
+        link.href = canvas.toDataURL('image/png')
+        link.click()
+      } catch (error) {
+        console.error("Ошибка при создании скриншота:", error)
+      }
+    }
+  }
 
   // Update time every minute
   useEffect(() => {
@@ -52,7 +79,7 @@ export default function DanielBioCard() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#f7bfb4] p-4">
-      <div className="w-full max-w-sm overflow-hidden rounded-lg shadow-lg">
+      <div ref={cardRef} className="w-full max-w-sm overflow-hidden rounded-lg shadow-lg">
         {/* Phone Header */}
         <div className="flex items-center justify-between bg-white p-2 px-4">
           <div className="h-5 w-5 rounded-full border border-gray-300"></div>
@@ -62,11 +89,16 @@ export default function DanielBioCard() {
             </div>
             <span className="text-xs font-medium">{currentDate}</span>
           </div>
-          <div className="space-y-1">
-            <div className="h-0.5 w-5 bg-gray-800"></div>
-            <div className="h-0.5 w-5 bg-gray-800"></div>
-            <div className="h-0.5 w-5 bg-gray-800"></div>
-          </div>
+          {/* Заменяем гамбургер-меню на кнопку камеры */}
+          <button 
+            onClick={(e) => {
+              e.stopPropagation(); // Чтобы не сработал onClick родительского элемента
+              captureAndDownload();
+            }}
+            className="p-1 rounded-full hover:bg-gray-100 transition-colors"
+          >
+            <Camera size={18} className="text-gray-800" />
+          </button>
         </div>
 
         {/* Main Content */}
@@ -79,12 +111,12 @@ export default function DanielBioCard() {
               </div>
               <div className="w-1/2 flex justify-center items-center">
                 <div className="relative h-32 w-32 overflow-hidden rounded-full border-2 border-black">
-                  <Image
-                    src="https://github.com/foxixus1.png"
+                  <img
+                    src="/avatar.jpg"
                     alt="Daniel (Foxix)"
-                    width={128}
-                    height={128}
-                    className="object-cover"
+                    className="object-cover w-full h-full"
+                    crossOrigin="anonymous"
+                    onLoad={() => setAvatarLoaded(true)}
                   />
                 </div>
               </div>
@@ -167,9 +199,6 @@ export default function DanielBioCard() {
         <div className="bg-[#e5d5d5] p-2 flex justify-center space-x-4">
           <Link href="https://youtube.com/@foxixus1" target="_blank" className="text-black hover:text-red-500">
             <Youtube size={20} />
-          </Link>
-          <Link href="https://discord.gg/your-discord" target="_blank" className="text-black hover:text-indigo-500">
-            <Discord size={20} />
           </Link>
           <Link href="mailto:contact@example.com" target="_blank" className="text-black hover:text-blue-500">
             <Mail size={20} />
