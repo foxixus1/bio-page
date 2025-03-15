@@ -1,11 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  // Задайте имя вашего репозитория, если он не в корне домена
-  basePath: process.env.NODE_ENV === 'production' ? '/bio-page' : '',
+  // Укажите точное имя репозитория
+  basePath: '/bio-page',
   images: {
     unoptimized: true,
   },
+  // Необходимо для правильной работы статических файлов
+  assetPrefix: '/bio-page/',
 }
 
 module.exports = nextConfig 
