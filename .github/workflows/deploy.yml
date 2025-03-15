@@ -17,13 +17,13 @@ jobs:
           node-version: '18'
 
       - name: Install Dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm install --legacy-peer-deps
 
       - name: Install Specific Packages
         run: npm install date-fns@3.0.0 --legacy-peer-deps
 
       - name: Build
-        run: npm run build --legacy-peer-deps
+        run: npm run build
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
