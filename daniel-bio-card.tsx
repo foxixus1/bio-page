@@ -200,7 +200,7 @@ export default function DanielBioCard() {
           <Link href="https://youtube.com/@foxixus1" target="_blank" className="text-black hover:text-red-500">
             <Youtube size={20} />
           </Link>
-          <Link href="mailto:contact@example.com" target="_blank" className="text-black hover:text-blue-500">
+          <Link href="mailto:neo.movies.mail@gmail.com" target="_blank" className="text-black hover:text-blue-500">
             <Mail size={20} />
           </Link>
           <Link href="https://github.com/foxixus1" target="_blank" className="text-black hover:text-gray-700">
