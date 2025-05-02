@@ -165,7 +165,7 @@ export default function DanielBioCard() {
               <div className="bg-white rounded-lg p-3 shadow-sm">
                 <ul className="space-y-2">
                   <li>
-                    <Link href="https://t.me/neo_news_c" target="_blank" className="flex items-center gap-2 text-black hover:text-blue-500">
+                    <Link href="https://t.me/erno_bio" target="_blank" className="flex items-center gap-2 text-black hover:text-blue-500">
                       <Code size={16} />
                       <span>Neo</span>
                     </Link>
@@ -197,7 +197,7 @@ export default function DanielBioCard() {
 
         {/* Social Links */}
         <div className="bg-[#e5d5d5] p-2 flex justify-center space-x-4">
-          <Link href="https://youtube.com/@foxixus1" target="_blank" className="text-black hover:text-red-500">
+          <Link href="https://youtube.com/@foxix_us" target="_blank" className="text-black hover:text-red-500">
             <Youtube size={20} />
           </Link>
           <Link href="mailto:neo.movies.mail@gmail.com" target="_blank" className="text-black hover:text-blue-500">
@@ -206,7 +206,7 @@ export default function DanielBioCard() {
           <Link href="https://github.com/foxixus1" target="_blank" className="text-black hover:text-gray-700">
             <Github size={20} />
           </Link>
-          <Link href="https://t.me/foxix_bio" target="_blank" className="text-black hover:text-blue-500">
+          <Link href="https://t.me/erno_bio" target="_blank" className="text-black hover:text-blue-500">
             <CIcon icon={cibTelegram} className="h-5 w-5" />
           </Link>
         </div>
