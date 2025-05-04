@@ -128,7 +128,7 @@ export default function DanielBioCard() {
               <div className="mb-4 bg-white rounded-lg p-3 shadow-sm">
                 <div className="flex items-center gap-2 mb-1">
                   <User size={18} className="text-black" />
-                  <span className="font-semibold">Daniel (Foxix)</span>
+                  <span className="font-semibold">Daniel (Erno)</span>
                 </div>
                 <p className="text-gray-600 text-xs ml-6">Developer & Creator</p>
               </div>
